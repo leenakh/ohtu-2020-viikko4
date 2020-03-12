@@ -1,0 +1,4 @@
+/MockitoDemo/build/
+/MockitoDemo/.gradle/
+/MockitoDemo/.nb-gradle/
+/MockitoDemo/*.tmp
