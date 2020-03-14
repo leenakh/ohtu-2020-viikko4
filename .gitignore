@@ -2,3 +2,8 @@
 /MockitoDemo/.gradle/
 /MockitoDemo/.nb-gradle/
 /MockitoDemo/*.tmp
+/MaksukorttiMockito/build/
+/MaksukorttiMockito/.gradle/
+/MaksukorttiMockito/.nb-gradle/
+/MaksukorttiMockito/*.tmp
+/MaksukorttiMockito/.nb-gradle/
