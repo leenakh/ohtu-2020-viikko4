@@ -7,3 +7,7 @@
 /MaksukorttiMockito/.nb-gradle/
 /MaksukorttiMockito/*.tmp
 /MaksukorttiMockito/.nb-gradle/
+/Verkkokauppa/build/
+/Verkkokauppa/.gradle/
+/Verkkokauppa/.nb-gradle/
+/Verkkokauppa/*.tmp/
