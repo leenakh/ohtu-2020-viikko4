@@ -23,7 +23,7 @@ public class KauppaTest {
         pankki = mock(Pankki.class);
 
         viite = mock(Viitegeneraattori.class);
-        when(viite.uusi()).thenReturn(42);
+        when(viite.uusi()).thenReturn(42).thenReturn(13);
 
         varasto = mock(Varasto.class);
         when(varasto.saldo(1)).thenReturn(10); 
@@ -73,5 +73,42 @@ public class KauppaTest {
         kauppa.tilimaksu("leena", "56789");
         
         verify(pankki).tilisiirto(eq("leena"), eq(42), eq("56789"), eq("33333-44455"), eq(5));
+    }
+    
+    @Test
+    public void metodinAloitaAsiointiKutsuminenNollaaOstostorin() {
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(2);
+        kauppa.tilimaksu("leena", "56789");
+        
+        verify(pankki).tilisiirto(eq("leena"), anyInt(), eq("56789"), eq("33333-44455"), eq(1));
+    }
+    
+    @Test
+    public void kauppaPyytaaUudenViitenumeronJokaiselleMaksutapahtumalle() {
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("leena", "56789");
+        
+        verify(pankki).tilisiirto(eq("leena"), eq(42), eq("56789"), eq("33333-44455"), eq(5));
+        
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.tilimaksu("leena", "56789");
+        
+        verify(pankki).tilisiirto(eq("leena"), eq(13), eq("56789"), eq("33333-44455"), eq(5));
+    }
+    
+    @Test
+    public void metodinPoistaKoristaPoistaaTuotteenOstoskorista() {
+        kauppa.aloitaAsiointi();
+        kauppa.lisaaKoriin(1);
+        kauppa.lisaaKoriin(2);
+        kauppa.poistaKorista(1);
+        kauppa.tilimaksu("leena", "56789");
+        
+        verify(pankki).tilisiirto(eq("leena"), eq(42), eq("56789"), eq("33333-44455"), eq(1));
     }
 }
